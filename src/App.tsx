@@ -20,7 +20,7 @@ class App extends React.Component<{}, State> {
 
   render() {
     return (
-      <main className="flex-row-jcC flex-aiC">
+      <main className="flex-row-aiC-jcC">
         <h1>Clock</h1>
       </main>
     );

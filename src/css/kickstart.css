@@ -92,13 +92,13 @@
   flex-direction: column;
 }
 
-.flex-row-jcC-aiC {
+.flex-row-aiC-jcC {
   align-items: center;
   display: flex;
   justify-content: center;
 }
 
-.flex-col-jcC-aiC {
+.flex-col-aiC-jcC {
   align-items: center;
   display: flex;
   flex-direction: column;
