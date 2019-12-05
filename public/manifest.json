@@ -1,6 +1,6 @@
 {
-  "short_name": "Calculator",
-  "name": "PM10 Calculator",
+  "short_name": "Pomodoro Clock",
+  "name": "PM10 Pomodoro Clock",
   "start_url": ".",
   "display": "standalone"
 }
