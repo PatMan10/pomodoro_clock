@@ -1,3 +1,7 @@
 body {
   background-color: lime;
 }
+
+div[id="clock"] {
+  margin-top: 40px;
+}
