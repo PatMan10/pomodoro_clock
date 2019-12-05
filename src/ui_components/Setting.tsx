@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 //////  UTILS  ///////
-import C from "../utils/Constants";
+//import C from "../utils/Constants";
 import F from "../utils/Functions";
-import L from "../utils/Logger";
+//import L from "../utils/Logger";
 
 interface Props {
   name: string;

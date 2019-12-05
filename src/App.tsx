@@ -7,9 +7,9 @@ import "./css/animate.css";
 import "./css/mobile.css";
 import "./css/desktop.css";
 //////  UTILS  ///////
-import C from "./utils/Constants";
-import F from "./utils/Functions";
-import L from "./utils/Logger";
+//import C from "./utils/Constants";
+//import F from "./utils/Functions";
+//import L from "./utils/Logger";
 //////  UI  ///////
 import Setting from "./ui_components/Setting";
 
@@ -26,8 +26,8 @@ class App extends React.Component<{}, State> {
       <main className="flex-col-aiC-jcC h-100vh">
         <h1>Pomodoro Clock</h1>
 
-        <div id="clock">
-          <div id="settings-container" className="blue-bg flex-row">
+        <div id="clock" className="white-bg flex-col-aiC">
+          <div id="clock-settings" className="blue-bg flex-row">
             <Setting
               name="break"
               value={5}
@@ -42,12 +42,12 @@ class App extends React.Component<{}, State> {
             />
           </div>
 
-          <div className="teal-bg flex-col-aiC">
+          <div id="clock-face" className="teal-bg flex-col-aiC">
             <label id="timer-label">Session</label>
             <label id="time-left">25:00</label>
           </div>
 
-          <div>
+          <div id="clock-controls">
             <i id="start" className="fas fa-play"></i>
             <i id="stop" className="fas fa-pause"></i>
             <i id="reset" className="fas fa-redo"></i>
