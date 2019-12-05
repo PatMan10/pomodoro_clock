@@ -8,11 +8,11 @@ import F from "../utils/Functions";
 interface Props {
   name: string;
   value: number;
-  incerement: () => void;
-  decerement: () => void;
+  increment: () => void;
+  decrement: () => void;
 }
 
-const Setting: React.FC<Props> = ({ name, value, incerement, decerement }) => {
+const Setting: React.FC<Props> = ({ name, value, increment, decrement }) => {
   return (
     <div id={name.concat("-setting")} className="flex-col-aiC">
       <label id={name.concat("-label")}>{F.capitalise(name)} Length</label>
@@ -23,13 +23,13 @@ const Setting: React.FC<Props> = ({ name, value, incerement, decerement }) => {
         <i
           id={name.concat("-increment")}
           className="fas fa-arrow-up"
-          onClick={incerement}
+          onClick={increment}
         ></i>
         <span id={name.concat("-length")}>{value}</span>
         <i
           id={name.concat("-decrement")}
           className="fas fa-arrow-down"
-          onClick={decerement}
+          onClick={decrement}
         ></i>
       </div>
     </div>
@@ -39,8 +39,8 @@ const Setting: React.FC<Props> = ({ name, value, incerement, decerement }) => {
 Setting.propTypes = {
   name: PropTypes.string.isRequired,
   value: PropTypes.number.isRequired,
-  incerement: PropTypes.func.isRequired,
-  decerement: PropTypes.func.isRequired
+  increment: PropTypes.func.isRequired,
+  decrement: PropTypes.func.isRequired
 };
 
 export default Setting;
