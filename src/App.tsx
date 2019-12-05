@@ -14,40 +14,40 @@ import "./css/desktop.css";
 import Setting from "./ui_components/Setting";
 
 interface State {
-  breakLength: number;
-  sessionLength: number;
+  breakDuration: number;
+  sessionDuration: number;
 }
 
 class App extends React.Component<{}, State> {
   constructor() {
     super({});
     this.state = {
-      breakLength: 5,
-      sessionLength: 25
+      breakDuration: 5,
+      sessionDuration: 25
     };
   }
 
   incerementBreak() {
-    this.setState(({ breakLength: curBL }) => ({
-      breakLength: curBL < 60 ? curBL + 1 : 60
+    this.setState(({ breakDuration: curBD }) => ({
+      breakDuration: curBD < 60 ? curBD + 1 : 60
     }));
   }
 
   decrementBreak() {
-    this.setState(({ breakLength: curBL }) => ({
-      breakLength: curBL > 0 ? curBL - 1 : 0
+    this.setState(({ breakDuration: curBD }) => ({
+      breakDuration: curBD > 0 ? curBD - 1 : 0
     }));
   }
 
   incerementSession() {
-    this.setState(({ sessionLength: curSL }) => ({
-      sessionLength: curSL < 60 ? curSL + 1 : 60
+    this.setState(({ sessionDuration: curSD }) => ({
+      sessionDuration: curSD < 60 ? curSD + 1 : 60
     }));
   }
 
   decrementSession() {
-    this.setState(({ sessionLength: curSL }) => ({
-      sessionLength: curSL > 0 ? curSL - 1 : 0
+    this.setState(({ sessionDuration: curSD }) => ({
+      sessionDuration: curSD > 0 ? curSD - 1 : 0
     }));
   }
 
@@ -64,16 +64,16 @@ class App extends React.Component<{}, State> {
   }
 
   render() {
-    const { breakLength, sessionLength } = this.state;
+    const { breakDuration, sessionDuration } = this.state;
     const breakProps = {
       name: "break",
-      value: breakLength,
+      value: breakDuration,
       increment: () => this.incerementBreak(),
       decrement: () => this.decrementBreak()
     };
     const sessionProps = {
       name: "session",
-      value: sessionLength,
+      value: sessionDuration,
       increment: () => this.incerementSession(),
       decrement: () => this.decrementSession()
     };
