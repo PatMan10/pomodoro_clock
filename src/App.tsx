@@ -19,6 +19,7 @@ interface State {
   minutes: number;
   seconds: number;
   timerName: string;
+  isRunning: boolean;
 }
 
 class App extends React.Component<{}, State> {
@@ -31,7 +32,8 @@ class App extends React.Component<{}, State> {
       sessionDuration: 1,
       minutes: 1,
       seconds: 0,
-      timerName: "session"
+      timerName: "session",
+      isRunning: false
     };
     this.interval = setTimeout(() => console.log("init interval"), 1000);
     this.decrementTimer = this.decrementTimer.bind(this);
@@ -45,85 +47,174 @@ class App extends React.Component<{}, State> {
   }
 
   decrementTimer() {
-    this.setState(
-      ({
-        breakDuration,
-        sessionDuration,
-        minutes: curM,
-        seconds: curS,
-        timerName: curTN
-      }) => {
-        let minutes = curM,
-          seconds = curS,
-          timerName = curTN;
-        if (minutes === 0 && seconds === 0) {
-          this.pause();
-          if (timerName === "session") {
-            timerName = "break";
-            minutes = breakDuration;
-          } else {
-            timerName = "session";
-            minutes = sessionDuration;
-          }
-          this.start();
-        } else {
-          if (seconds === 0) {
-            --minutes;
-            seconds = 59;
-          } else {
-            --seconds;
-          }
-        }
-        return { minutes, seconds, timerName };
+    const {
+      breakDuration,
+      sessionDuration,
+      minutes: curM,
+      seconds: curS,
+      timerName: curTN
+    } = this.state;
+
+    let minutes = curM,
+      seconds = curS,
+      timerName = curTN;
+
+    if (minutes === 0 && seconds === 0) {
+      this.pause();
+      if (timerName === "session") {
+        timerName = "break";
+        minutes = breakDuration;
+      } else {
+        timerName = "session";
+        minutes = sessionDuration;
       }
-    );
+      this.setState(
+        {
+          minutes,
+          seconds,
+          timerName
+        },
+        this.start
+      );
+    } else {
+      if (seconds === 0) {
+        --minutes;
+        seconds = 59;
+      } else {
+        --seconds;
+      }
+      this.setState({
+        minutes,
+        seconds
+      });
+    }
   }
 
   incrementBreak() {
-    this.setState(({ breakDuration: curBD }) => ({
-      breakDuration: curBD < 60 ? curBD + 1 : 60
-    }));
+    const {
+      breakDuration: curBD,
+      minutes: curM,
+      seconds: curS,
+      timerName,
+      isRunning
+    } = this.state;
+
+    if (curBD === 60 || isRunning) return;
+
+    const newState = {
+      breakDuration: curBD + 1,
+      minutes: curM,
+      seconds: curS
+    };
+
+    if (timerName === "break") {
+      newState.minutes = newState.breakDuration;
+      newState.seconds = 0;
+    }
+    this.setState(newState);
   }
 
   decrementBreak() {
-    this.setState(({ breakDuration: curBD }) => ({
-      breakDuration: curBD > 0 ? curBD - 1 : 0
-    }));
+    const {
+      breakDuration: curBD,
+      minutes: curM,
+      seconds: curS,
+      timerName,
+      isRunning
+    } = this.state;
+
+    if (curBD === 1 || isRunning) return;
+
+    const newState = {
+      breakDuration: curBD - 1,
+      minutes: curM,
+      seconds: curS
+    };
+
+    if (timerName === "break") {
+      newState.minutes = newState.breakDuration;
+      newState.seconds = 0;
+    }
+    this.setState(newState);
   }
 
   incrementSession() {
-    this.setState(({ sessionDuration: curSD }) => ({
-      sessionDuration: curSD < 60 ? curSD + 1 : 60
-    }));
+    const {
+      sessionDuration: curSD,
+      minutes: curM,
+      seconds: curS,
+      timerName,
+      isRunning
+    } = this.state;
+
+    if (curSD === 60 || isRunning) return;
+
+    const newState = {
+      sessionDuration: curSD + 1,
+      minutes: curM,
+      seconds: curS
+    };
+
+    if (timerName === "session") {
+      newState.minutes = newState.sessionDuration;
+      newState.seconds = 0;
+    }
+    this.setState(newState);
   }
 
   decrementSession() {
-    this.setState(({ sessionDuration: curSD }) => ({
-      sessionDuration: curSD > 0 ? curSD - 1 : 0
-    }));
+    const {
+      sessionDuration: curSD,
+      minutes: curM,
+      seconds: curS,
+      timerName,
+      isRunning
+    } = this.state;
+
+    if (curSD === 1 || isRunning) return;
+
+    const newState = {
+      sessionDuration: curSD - 1,
+      minutes: curM,
+      seconds: curS
+    };
+
+    if (timerName === "session") {
+      newState.minutes = newState.sessionDuration;
+      newState.seconds = 0;
+    }
+    this.setState(newState);
   }
 
   start() {
+    if (this.state.isRunning) return;
+
     console.log("start");
-    this.interval = setInterval(this.decrementTimer, 1000);
+    this.setState(
+      { isRunning: true },
+      () => (this.interval = setInterval(this.decrementTimer, 1000))
+    );
   }
 
   pause() {
+    if (!this.state.isRunning) return;
+
     console.log("pause");
     clearInterval(this.interval);
+    this.setState({ isRunning: false });
   }
 
   reset() {
     console.log("reset");
     clearInterval(this.interval);
 
-    this.setState(({ breakDuration, sessionDuration, timerName }) => {
-      let minutes,
-        seconds = 0;
-      if (timerName === "break") minutes = breakDuration;
-      else minutes = sessionDuration;
+    this.setState(({ sessionDuration }) => {
+      let minutes = sessionDuration,
+        seconds = 0,
+        timerName = "session",
+        isRunning = false;
 
-      return { minutes, seconds };
+      return { minutes, seconds, timerName, isRunning };
     });
   }
 
