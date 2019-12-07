@@ -32,9 +32,9 @@ class App extends React.Component<{}, State> {
   constructor() {
     super({});
     this.state = {
-      breakDuration: 1,
-      sessionDuration: 1,
-      minutes: 1,
+      breakDuration: 48,
+      sessionDuration: 48,
+      minutes: 48,
       seconds: 0,
       timerName: "session",
       isRunning: false
@@ -246,13 +246,13 @@ class App extends React.Component<{}, State> {
       <main className="teal-bg flex-col-aiC-jcC h-100vh">
         <h1>Pomodoro Clock</h1>
 
-        <div id="clock" className="white-bg flex-col-aiC">
-          <div id="clock-settings" className="blue-bg flex-row-jcSE w-100p">
+        <div id="clock" className="flex-col-aiC">
+          <div id="clock-settings" className="flex-row-jcSB w-100p">
             <Setting {...breakProps} />
             <Setting {...sessionProps} />
           </div>
 
-          <div id="clock-face" className="yellow-bg flex-col-aiC w-50p">
+          <div id="clock-face" className="flex-col-aiC">
             <label id="timer-label" className="white-txt">
               {F.capitalise(timerName)}
             </label>
@@ -262,7 +262,7 @@ class App extends React.Component<{}, State> {
             </label>
           </div>
 
-          <div id="clock-controls" className="red-bg flex-row flex-jcSE w-20p">
+          <div id="clock-controls" className="flex-row flex-jcSB">
             <div
               id="start"
               className="icon icon-s-square"

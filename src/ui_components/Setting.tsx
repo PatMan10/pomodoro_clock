@@ -17,13 +17,13 @@ interface Props {
 
 const Setting: React.FC<Props> = ({ name, value, increment, decrement }) => {
   return (
-    <div id={name.concat("-setting")} className="cyan-bg flex-col-aiC">
+    <div id={name.concat("-setting")} className="flex-col-aiC">
       <label id={name.concat("-label")} className="white-txt">
         {F.capitalise(name)} Length
       </label>
       <div
         id={name.concat("-controls")}
-        className="red-bg flex-row-aiC flex-jcSE w-75p"
+        className="flex-row-aiC flex-jcSE w-75p"
       >
         <div
           id={name.concat("-increment")}
