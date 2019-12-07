@@ -1,7 +1,44 @@
 body {
   background-color: lime;
+  font-family: zekton, tahoma;
+}
+
+h1 {
+  color: white;
+  font-weight: bold;
 }
 
 div[id="clock"] {
   margin-top: 40px;
+  width: 90%;
+}
+
+div[id="clock-settings"] label {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+div[id="clock-settings"] span {
+  font-size: 1.4em;
+  font-weight: bold;
+}
+
+div[id="clock-face"] {
+  border: 4px solid red;
+  border-radius: 5%;
+  margin: 15px 0 15px 0;
+}
+
+div[id="clock-face"] > label {
+  margin: 0;
+}
+
+label[id="timer-label"] {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+label[id="time-left"] {
+  font-size: 3em;
+  font-weight: bold;
 }

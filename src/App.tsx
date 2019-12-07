@@ -6,6 +6,10 @@ import "./css/kickstart.css";
 import "./css/animate.css";
 import "./css/mobile.css";
 import "./css/desktop.css";
+//////  ICONS  ///////
+import play from "./img/icons/play-solid.svg";
+import pause from "./img/icons/pause-solid.svg";
+import reset from "./img/icons/reset-solid.svg";
 //////  UTILS  ///////
 //import C from "./utils/Constants";
 import F from "./utils/Functions";
@@ -239,39 +243,47 @@ class App extends React.Component<{}, State> {
       decrement: this.decrementSession
     };
     return (
-      <main className="flex-col-aiC-jcC h-100vh">
+      <main className="teal-bg flex-col-aiC-jcC h-100vh">
         <h1>Pomodoro Clock</h1>
 
         <div id="clock" className="white-bg flex-col-aiC">
-          <div id="clock-settings" className="blue-bg flex-row">
+          <div id="clock-settings" className="blue-bg flex-row-jcSE w-100p">
             <Setting {...breakProps} />
             <Setting {...sessionProps} />
           </div>
 
-          <div id="clock-face" className="teal-bg flex-col-aiC">
-            <label id="timer-label">{F.capitalise(timerName)}</label>
-            <label id="time-left">
+          <div id="clock-face" className="yellow-bg flex-col-aiC w-50p">
+            <label id="timer-label" className="white-txt">
+              {F.capitalise(timerName)}
+            </label>
+            <label id="time-left" className="white-txt">
               {minutes}:
               {seconds < 10 ? "0".concat(seconds.toString()) : seconds}
             </label>
           </div>
 
-          <div id="clock-controls">
-            <i
+          <div id="clock-controls" className="red-bg flex-row flex-jcSE w-20p">
+            <div
               id="start"
-              className="fas fa-play"
+              className="icon icon-s-square"
               onClick={() => this.start()}
-            ></i>
-            <i
+            >
+              <img src={play} alt="play" className="full-icon" />
+            </div>
+            <div
               id="pause"
-              className="fas fa-pause"
+              className="icon icon-s-square"
               onClick={() => this.pause()}
-            ></i>
-            <i
+            >
+              <img src={pause} alt="pause" className="full-icon" />
+            </div>
+            <div
               id="reset"
-              className="fas fa-redo"
+              className="icon icon-s-square"
               onClick={() => this.reset()}
-            ></i>
+            >
+              <img src={reset} alt="reset" className="full-icon" />
+            </div>
           </div>
         </div>
       </main>

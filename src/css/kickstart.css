@@ -1707,6 +1707,19 @@
 /*
  * icons
  * */
+
+.responsive-icon {
+  border-radius: inherit;
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.full-icon {
+  border-radius: inherit;
+  height: 100%;
+  width: 100%;
+}
+
 .icon {
   align-items: center;
   border-radius: 10%;
