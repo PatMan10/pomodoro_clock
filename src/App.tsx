@@ -7,7 +7,6 @@ import "./css/mobile.css";
 import "./css/desktop.css";
 ////// LIBS ////////
 import React from "react";
-import { Howl } from "howler";
 //////  AUDIO  ///////
 import alarm from "./assets/audio/alarm.mp3";
 //////  ICONS  ///////
@@ -31,22 +30,20 @@ interface State {
 }
 
 class App extends React.Component<{}, State> {
-  private alarm: Howl;
+  private alarm: HTMLAudioElement;
   private interval: ReturnType<typeof setInterval>;
 
   constructor() {
     super({});
     this.state = {
-      breakDuration: 48,
-      sessionDuration: 48,
-      minutes: 48,
+      breakDuration: 5,
+      sessionDuration: 25,
+      minutes: 25,
       seconds: 0,
       timerName: "session",
       isRunning: false
     };
-    this.alarm = new Howl({
-      src: [alarm]
-    });
+    this.alarm = new Audio(alarm);
     this.interval = setTimeout(() => console.log("init interval"), 1000);
     this.decrementTimer = this.decrementTimer.bind(this);
     this.incrementBreak = this.incrementBreak.bind(this);
@@ -74,21 +71,24 @@ class App extends React.Component<{}, State> {
     if (minutes === 0 && seconds === 0) {
       this.alarm.play();
       this.pause();
-      if (timerName === "session") {
-        timerName = "break";
-        minutes = breakDuration;
-      } else {
-        timerName = "session";
-        minutes = sessionDuration;
-      }
-      this.setState(
-        {
-          minutes,
-          seconds,
-          timerName
-        },
-        this.start
-      );
+
+      setTimeout(() => {
+        if (timerName === "session") {
+          timerName = "break";
+          minutes = breakDuration;
+        } else {
+          timerName = "session";
+          minutes = sessionDuration;
+        }
+        this.setState(
+          {
+            minutes,
+            seconds,
+            timerName
+          },
+          this.start
+        );
+      }, 2000);
     } else {
       if (seconds === 0) {
         --minutes;
@@ -202,7 +202,6 @@ class App extends React.Component<{}, State> {
   start() {
     if (this.state.isRunning) return;
 
-    console.log("start");
     this.setState(
       { isRunning: true },
       () => (this.interval = setInterval(this.decrementTimer, 1000))
@@ -212,13 +211,11 @@ class App extends React.Component<{}, State> {
   pause() {
     if (!this.state.isRunning) return;
 
-    console.log("pause");
     clearInterval(this.interval);
     this.setState({ isRunning: false });
   }
 
   reset() {
-    console.log("reset");
     clearInterval(this.interval);
 
     this.setState(({ sessionDuration }) => {
@@ -265,7 +262,11 @@ class App extends React.Component<{}, State> {
             <label id="timer-label" className="white-txt">
               {F.capitalise(timerName)}
             </label>
-            <label id="time-left" className="white-txt">
+            <label
+              id="time-left"
+              className="white-txt"
+              style={{ color: minutes === 0 && seconds < 60 ? "red" : "" }}
+            >
               {minutes}:
               {seconds < 10 ? "0".concat(seconds.toString()) : seconds}
             </label>
