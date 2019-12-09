@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 //////  ICONS  ///////
-import arrowDown from "../img/icons/arrow-down-solid.svg";
-import arrowUp from "../img/icons/arrow-up-solid.svg";
+import arrowDown from "../assets/img/icons/arrow-down-solid.svg";
+import arrowUp from "../assets/img/icons/arrow-up-solid.svg";
 //////  UTILS  ///////
 //import C from "../utils/Constants";
 import F from "../utils/Functions";

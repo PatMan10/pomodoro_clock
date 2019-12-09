@@ -1,4 +1,3 @@
-import React from "react";
 //////  CSS  ////////
 import "./css/normalise.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -6,10 +5,15 @@ import "./css/kickstart.css";
 import "./css/animate.css";
 import "./css/mobile.css";
 import "./css/desktop.css";
+////// LIBS ////////
+import React from "react";
+import { Howl } from "howler";
+//////  AUDIO  ///////
+import alarm from "./assets/audio/alarm.mp3";
 //////  ICONS  ///////
-import play from "./img/icons/play-solid.svg";
-import pause from "./img/icons/pause-solid.svg";
-import reset from "./img/icons/reset-solid.svg";
+import play from "./assets/img/icons/play-solid.svg";
+import pause from "./assets/img/icons/pause-solid.svg";
+import reset from "./assets/img/icons/reset-solid.svg";
 //////  UTILS  ///////
 //import C from "./utils/Constants";
 import F from "./utils/Functions";
@@ -27,6 +31,7 @@ interface State {
 }
 
 class App extends React.Component<{}, State> {
+  private alarm: Howl;
   private interval: ReturnType<typeof setInterval>;
 
   constructor() {
@@ -39,6 +44,9 @@ class App extends React.Component<{}, State> {
       timerName: "session",
       isRunning: false
     };
+    this.alarm = new Howl({
+      src: [alarm]
+    });
     this.interval = setTimeout(() => console.log("init interval"), 1000);
     this.decrementTimer = this.decrementTimer.bind(this);
     this.incrementBreak = this.incrementBreak.bind(this);
@@ -64,6 +72,7 @@ class App extends React.Component<{}, State> {
       timerName = curTN;
 
     if (minutes === 0 && seconds === 0) {
+      this.alarm.play();
       this.pause();
       if (timerName === "session") {
         timerName = "break";
