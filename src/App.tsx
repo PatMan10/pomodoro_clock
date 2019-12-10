@@ -1,23 +1,22 @@
-//////  CSS  ////////
+//---------CSS------------
 import "./css/normalise.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./css/kickstart.css";
-import "./css/animate.css";
 import "./css/mobile.css";
 import "./css/desktop.css";
-////// LIBS ////////
+//---------LIBS------------
 import React from "react";
-//////  AUDIO  ///////
+//---------AUDIO------------
 import alarm from "./assets/audio/alarm.mp3";
-//////  ICONS  ///////
+//---------ICONS------------
 import play from "./assets/img/icons/play-solid.svg";
 import pause from "./assets/img/icons/pause-solid.svg";
 import reset from "./assets/img/icons/reset-solid.svg";
-//////  UTILS  ///////
+//---------UTILS------------
 //import C from "./utils/Constants";
 import F from "./utils/Functions";
 //import L from "./utils/Logger";
-//////  UI  ///////
+//---------UI------------
 import Setting from "./ui_components/Setting";
 
 interface State {
