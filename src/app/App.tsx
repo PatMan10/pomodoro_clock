@@ -1,13 +1,10 @@
 //---------CSS------------
-import "./css/normalise.css";
+import "normalize.css/normalize.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./css/kickstart.css";
 import "./css/mobile.css";
 import "./css/desktop.css";
 //---------LIBS------------
 import React from "react";
-//---------AUDIO------------
-import alarm from "./assets/audio/alarm.mp3";
 //---------ICONS------------
 import play from "./assets/img/icons/play-solid.svg";
 import pause from "./assets/img/icons/pause-solid.svg";
@@ -18,6 +15,8 @@ import F from "./utils/Functions";
 //import L from "./utils/Logger";
 //---------UI------------
 import Setting from "./ui_components/Setting";
+//---------AUDIO------------
+const alarm = require("./assets/audio/alarm.mp3");
 
 interface State {
   breakDuration: number;
