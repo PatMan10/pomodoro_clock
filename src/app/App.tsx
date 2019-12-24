@@ -1,6 +1,7 @@
 //---------CSS------------
 import "normalize.css/normalize.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "pmt-kickstart.css/src/kickstart.min.css";
 import "./css/mobile.css";
 import "./css/desktop.css";
 //---------LIBS------------
