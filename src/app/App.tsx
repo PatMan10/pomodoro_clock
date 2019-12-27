@@ -19,6 +19,8 @@ import Setting from "./ui_components/Setting";
 //---------AUDIO------------
 const alarm = require("./assets/audio/alarm.mp3");
 
+interface Props {}
+
 interface State {
   breakDuration: number;
   sessionDuration: number;
@@ -28,12 +30,12 @@ interface State {
   isRunning: boolean;
 }
 
-class App extends React.Component<{}, State> {
+class App extends React.Component<Props, State> {
   private alarm: HTMLAudioElement;
   private interval: ReturnType<typeof setInterval>;
 
-  constructor() {
-    super({});
+  constructor(props: Props) {
+    super(props);
     this.state = {
       breakDuration: 5,
       sessionDuration: 25,
