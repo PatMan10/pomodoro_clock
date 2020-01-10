@@ -1,7 +1,7 @@
 //---------CSS------------
 import "normalize.css/normalize.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "pmt-kickstart.css/src/kickstart.min.css";
+import "@patman10/kickstart.css/dist/kickstart.min.css";
 import "./css/mobile.css";
 import "./css/desktop.css";
 //---------LIBS------------
@@ -46,17 +46,9 @@ class App extends React.Component<Props, State> {
     };
     this.alarm = new Audio(alarm);
     this.interval = setTimeout(() => console.log("init interval"), 1000);
-    this.decrementTimer = this.decrementTimer.bind(this);
-    this.incrementBreak = this.incrementBreak.bind(this);
-    this.decrementBreak = this.decrementBreak.bind(this);
-    this.incrementSession = this.incrementSession.bind(this);
-    this.decrementSession = this.decrementSession.bind(this);
-    this.start = this.start.bind(this);
-    this.pause = this.pause.bind(this);
-    this.reset = this.reset.bind(this);
   }
 
-  decrementTimer() {
+  decrementTimer = () => {
     const {
       breakDuration,
       sessionDuration,
@@ -102,9 +94,9 @@ class App extends React.Component<Props, State> {
         seconds
       });
     }
-  }
+  };
 
-  incrementBreak() {
+  incrementBreak = () => {
     const {
       breakDuration: curBD,
       minutes: curM,
@@ -126,9 +118,9 @@ class App extends React.Component<Props, State> {
       newState.seconds = 0;
     }
     this.setState(newState);
-  }
+  };
 
-  decrementBreak() {
+  decrementBreak = () => {
     const {
       breakDuration: curBD,
       minutes: curM,
@@ -150,9 +142,9 @@ class App extends React.Component<Props, State> {
       newState.seconds = 0;
     }
     this.setState(newState);
-  }
+  };
 
-  incrementSession() {
+  incrementSession = () => {
     const {
       sessionDuration: curSD,
       minutes: curM,
@@ -174,9 +166,9 @@ class App extends React.Component<Props, State> {
       newState.seconds = 0;
     }
     this.setState(newState);
-  }
+  };
 
-  decrementSession() {
+  decrementSession = () => {
     const {
       sessionDuration: curSD,
       minutes: curM,
@@ -198,25 +190,25 @@ class App extends React.Component<Props, State> {
       newState.seconds = 0;
     }
     this.setState(newState);
-  }
+  };
 
-  start() {
+  start = () => {
     if (this.state.isRunning) return;
 
     this.setState(
       { isRunning: true },
       () => (this.interval = setInterval(this.decrementTimer, 1000))
     );
-  }
+  };
 
-  pause() {
+  pause = () => {
     if (!this.state.isRunning) return;
 
     clearInterval(this.interval);
     this.setState({ isRunning: false });
-  }
+  };
 
-  reset() {
+  reset = () => {
     clearInterval(this.interval);
 
     this.setState(({ sessionDuration }) => {
@@ -227,7 +219,7 @@ class App extends React.Component<Props, State> {
 
       return { minutes, seconds, timerName, isRunning };
     });
-  }
+  };
 
   render() {
     const {
